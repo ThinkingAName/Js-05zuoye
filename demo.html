@@ -1,0 +1,131 @@
+<!doctype html>               <!--申明html文档-->
+<html>
+ <head>
+  <meta charset="utf-8">      <!--字符编码为国际编码-->
+  <meta name="Author" content="JS40期风屿——不懂就问">    <!--网页创建者-->
+  <meta name="Keywords" content="作业，练习题">         <!--供搜索引擎搜索匹配的关键-->
+  <meta name="description" content="课后练习题作业，熟悉课堂学习操作">  <!--在搜索有结果页面显示的网页描述-->
+  <title>第5次课后作业</title>   <!--网页标题-->
+  <style>
+	body, p, ul, dl, dd, ol, h1, h2, h3, h4, h5, h6{ margin:0;}
+	ul,ol{ padding-left:0;list-style:none;}
+	table{ border-collapse:collapse; }
+	th, td{ padding: 0; }
+	em,i{ font-style:normal;/*设置字体样式：正常显示（就是不倾斜）*/}
+	strong,b{ font-weight:normal;/*设置字体加粗：正常显示（就是不加粗）*/}
+	a{ text-decoration:none;/*去掉下划线*/}
+    .swip{
+        width: 640px;
+        height: 360px;
+        margin:100px auto;
+    }
+      .swip img{
+          display: none;
+      }
+      .swip img.show{
+          display: block;
+          position: relative;
+      }
+
+  </style>
+     <!--
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+      -->
+
+</head>
+<body>
+    <div class="swip">
+        <img class="show" src="img/1.png" alt="1" width="640px" height="360px">
+        <img src="img/2.png" alt="2" width="640px" height="360px">
+        <img src="img/3.png" alt="3" width="640px" height="360px">
+        <img src="img/4.png" alt="4" width="640px" height="360px">
+        <img src="img/5.png" alt="5" width="640px" height="360px">
+        <button class="left"><</button>
+        <button class="right">></button>
+        <button class="round" value="true" autofocus="autofocus">循环播放</button>
+        <button class="noround" value="false">正常播放</button>
+    </div>
+
+
+    <script>
+        var showImg = document.getElementsByTagName("img");
+        var leftBtn = document.getElementsByClassName("left")[0];
+        var rightBtn = document.getElementsByClassName("right")[0];
+        var num = 0;
+        var round = document.getElementsByClassName("round")[0];
+        var noRound = document.getElementsByClassName("noround")[0];
+        console.log(round.value);
+             round.onclick = function () {
+                 round.value = "true";
+                 round.autofocus = "autofocus";
+                 noRound.value = "false";
+                 noRound.removeAttribute("autofocus");
+             }
+            noRound.onclick = function () {
+                noRound.value = "true";
+                noRound.autofocus = "autofocus";
+                round.value = "false";
+                round.removeAttribute("autofocus");
+                console.log(typeof(noRound.value));
+            }
+            leftBtn.onclick = function () {
+                if(round.value=="true"){
+                    leftRound();
+                }
+                else
+                    leftNoRound();
+            }
+            rightBtn.onclick = function () {
+                if(round.value=="true"){
+                    rightRound();
+                }
+                else
+                    rightNoRound();
+            }
+
+                rightRound = function () {
+                    if(num<showImg.length-1){
+                        showImg[num].className="";
+                        num++;
+                        showImg[num].className="show";
+                    }else {
+                        showImg[num].className="";
+                        num=0;
+                        showImg[num].className="show";
+                    }
+                }
+                leftRound = function () {
+                    if(num>0) {
+                        showImg[num].className="";
+                        num--;
+                        showImg[num].className = "show";
+                    }else{
+                        showImg[num].className="";
+                        num=showImg.length-1;
+                        showImg[num].className = "show";
+                    }
+                }
+                rightNoRound = function () {
+                    if(num<showImg.length-1){
+                        showImg[num].className="";
+                        num++;
+                        showImg[num].className="show";
+                    }else {
+                        num=showImg.length-1;
+                        showImg[num].className="show";
+                    }
+
+                }
+                leftNoRound = function () {
+                    if(num>0) {
+                        showImg[num].className="";
+                        num--;
+                        showImg[num].className = "show";
+                    }else{
+                        num=0;
+                        showImg[num].className = "show";
+                    }
+                }
+    </script>
+</body>
+</html>
